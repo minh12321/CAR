@@ -5,16 +5,11 @@ Frontend thuần React (Vite + React 19 + React Router + Tailwind v4 + shadcn/ui
 ## Chạy dự án
 
 ```bash
-npm install        # hoặc: bun install / pnpm install
-npm run dev        # mở http://localhost:5173
+npm install 
+npm run dev       
 npm run build
 npm run preview
 ```
-
-## Đăng nhập demo
-
-- User: `DHTL2026`
-- Pass: `thanhcong@2026`
 
 ## Cấu trúc thư mục
 
@@ -37,10 +32,3 @@ Tất cả component đọc dữ liệu qua `src/services/car-service.ts`. Đổ
 hàm trong file này từ "đọc mock" sang `fetch(...)` là đủ — UI không cần
 sửa.
 
-## Tính năng
-
-- Slider CAR ở Phân vùng 1 cập nhật reactive: Trạng thái hiện tại, biểu
-  đồ phi tuyến ROA/ROE, AI Insight, bảng so sánh, thẻ khuyến nghị.
-- Login giả lập (`DHTL2026` / `thanhcong@2026`) → điều hướng vào dashboard.
-- Dark/Light mode: nút mặt trời/mặt trăng ở góc trên phải, hoặc trong
-  Cài đặt → Ứng dụng → Giao diện.

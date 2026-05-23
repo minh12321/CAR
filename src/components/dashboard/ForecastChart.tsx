@@ -10,15 +10,17 @@ import {
   LabelList,
 } from "recharts";
 import { carService } from "@/services/car-service";
+import { useCarStore } from "@/stores/car-store";
 
 export function ForecastChart() {
-  const data = carService.getForecastIndustry();
+  const period = useCarStore((s) => s.period);
+  const data = carService.getForecastIndustry(period);
   const last = data[data.length - 1];
 
   return (
     <Card className="p-3">
       <div className="text-[12px] font-semibold mb-1">
-        5. DỰ BÁO CAR 2026 (TỔNG NGÀNH – ARIMA)
+        5. DỰ BÁO CAR {period} (TỔNG NGÀNH – ARIMA)
       </div>
       <div className="h-[170px]">
         <ResponsiveContainer width="100%" height="100%">
@@ -43,7 +45,7 @@ export function ForecastChart() {
         </ResponsiveContainer>
       </div>
       <div className="text-[11px] text-muted-foreground text-center mt-1">
-        Dự báo CAR trung bình ngành năm 2026:{" "}
+        Dự báo CAR trung bình ngành năm {last.year.replace('F', '')}:{" "}
         <span className="text-primary font-bold">{last.car}%</span>
       </div>
     </Card>

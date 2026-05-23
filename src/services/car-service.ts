@@ -15,8 +15,8 @@ import {
   ROE_MAX,
   type ZoneStatus,
 } from "@/data/mock-car-model";
-import { FORECAST_INDUSTRY, FORECAST_BY_GROUP } from "@/data/mock-forecast";
-import { BANKS, BANK_GROUPS, PERIODS, METRICS } from "@/data/mock-banks";
+import { FULL_FORECAST_DATA } from "@/data/mock-forecast";
+import { BANKS, BANKS_BY_GROUP, BANK_GROUPS, PERIODS, METRICS } from "@/data/mock-banks";
 
 export const carService = {
   getRoa: (car: number) => calcRoa(car),
@@ -38,9 +38,43 @@ export const carService = {
     }
     return points;
   },
-  getForecastIndustry: () => FORECAST_INDUSTRY,
-  getForecastByGroup: () => FORECAST_BY_GROUP,
-  getBanks: () => BANKS,
+  getForecastIndustry: (period: string) => {
+    const match = period.match(/\d{4}/g);
+    const start = match ? +match[0] : 2014;
+    const end = match ? +match[1] : 2026;
+    const maxEnd = Math.min(2026, end + 1);
+    
+    const filtered = FULL_FORECAST_DATA.filter(d => +d.year >= start && +d.year <= maxEnd);
+    return filtered.map((d, i) => ({ 
+      year: i === filtered.length - 1 ? `${d.year}F` : d.year, 
+      car: d["Toàn ngành"] 
+    }));
+  },
+  getForecastByGroup: (period: string) => {
+    const match = period.match(/\d{4}/g);
+    const start = match ? +match[0] : 2014;
+    const end = match ? +match[1] : 2026;
+    const maxEnd = Math.min(2026, end + 1);
+    
+    const filtered = FULL_FORECAST_DATA.filter(d => +d.year >= start && +d.year <= maxEnd);
+    const years = filtered.map((d, i) => i === filtered.length - 1 ? `${d.year}F` : d.year);
+    
+    const groups = ["NHTM Nhà nước", "NHTMCP lớn", "NHTMCP vừa", "NHTMCP nhỏ"];
+    const rows = groups.map(g => {
+      const values: Record<string, number> = {};
+      filtered.forEach((d, i) => {
+        const yearKey = i === filtered.length - 1 ? `${d.year}F` : d.year;
+        values[yearKey] = d[g as keyof typeof d] as number;
+      });
+      const firstVal = values[years[0]];
+      const lastVal = values[years[years.length - 1]];
+      const trend = lastVal >= firstVal ? "up" : "down";
+      return { group: g, values, trend };
+    });
+    
+    return { years, rows };
+  },
+  getBanks: (group?: string) => group ? BANKS_BY_GROUP[group] || [] : BANKS,
   getBankGroups: () => BANK_GROUPS,
   getPeriods: () => PERIODS,
   getMetrics: () => METRICS,

@@ -6,10 +6,12 @@ import {
 import { useThemeStore } from "@/stores/theme-store";
 import { useAuthStore } from "@/stores/auth-store";
 import { Button } from "@/components/ui/button";
+import { Globe } from "lucide-react";
 import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem,
   DropdownMenuTrigger, DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
+import { useState } from "react";
 
 const NAV = [
   { to: "/dashboard", label: "Tổng quan", icon: Home },
@@ -23,6 +25,12 @@ const NAV = [
   { to: "/settings", label: "Cài đặt", icon: Settings },
 ] as const;
 
+const languages = [
+  { code: "en", label: "English" },
+  { code: "vi", label: "Tiếng Việt" },
+];
+
+
 export function AppShell({ children }: { children: React.ReactNode }) {
   const theme = useThemeStore((s) => s.theme);
   const toggle = useThemeStore((s) => s.toggle);
@@ -30,6 +38,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const logout = useAuthStore((s) => s.logout);
   const navigate = useNavigate();
   const path = useLocation().pathname;
+  const [lang, setLang] = useState("vi");
 
   return (
     <div className="min-h-screen flex bg-background text-foreground">
@@ -51,10 +60,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             const Icon = item.icon;
             return (
               <Link key={item.to} to={item.to}
-                className={`flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors ${
-                  active ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium"
-                    : "text-sidebar-foreground hover:bg-sidebar-accent/40"
-                }`}>
+                className={`flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors ${active ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium"
+                  : "text-sidebar-foreground hover:bg-sidebar-accent/40"
+                  }`}>
                 <Icon className="w-4 h-4" /><span>{item.label}</span>
               </Link>
             );
@@ -76,6 +84,69 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <p className="text-[11px] text-muted-foreground">Banking Decision & Performance Simulator</p>
           </div>
           <div className="flex items-center gap-3">
+            <div className="relative group">
+              {/* Button */}
+              <button
+                className="
+                flex items-center gap-2
+                h-9 px-3
+                rounded-xl
+                border border-white/10
+                bg-white/5
+                hover:bg-white/10
+                text-white
+                transition-all duration-200
+                backdrop-blur-md
+                shadow-sm
+              "
+              >
+                <Globe size={16} className="opacity-80" />
+
+                <span className="text-sm font-medium uppercase">
+                  {lang}
+                </span>
+              </button>
+
+              {/* Dropdown */}
+              <div
+                className="
+                absolute right-0 mt-2
+                w-28
+                overflow-hidden
+                rounded-xl
+                border border-white/10
+                bg-[#111827]/95
+                backdrop-blur-xl
+                shadow-2xl
+                opacity-0 invisible
+                translate-y-1
+                transition-all duration-200
+                group-hover:opacity-100
+                group-hover:visible
+                group-hover:translate-y-0
+                z-50
+              "
+              >
+                {languages.map((item) => (
+                  <button
+                    key={item.code}
+                    onClick={() => setLang(item.code)}
+                    className={`
+                    w-full px-4 py-2.5
+                    text-left text-sm
+                    transition-colors
+                    hover:bg-white/10
+                    ${lang === item.code
+                        ? "text-primary font-semibold"
+                        : "text-gray-200"
+                      }
+                  `}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </div>
             <div className="hidden md:flex items-center gap-2 text-xs text-muted-foreground border border-border rounded-md px-3 py-1.5">
               <CalendarDays className="w-3.5 h-3.5" /><span>Cập nhật: 20/05/2026</span>
             </div>

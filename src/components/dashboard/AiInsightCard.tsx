@@ -18,20 +18,19 @@ export function AiInsightCard() {
   const tips =
     status === "optimal"
       ? [
-          "Duy trì mức CAR trong khoảng tối ưu để tối đa hóa lợi nhuận.",
-          "Tiếp tục kiểm soát chất lượng tài sản và chi phí hoạt động.",
-          "Theo dõi sát biến động thị trường và yêu cầu vốn Basel III.",
+          "Duy trì cân bằng rủi ro – lợi nhuận trong vùng tối ưu",
+          "Duy trì tăng cường quản trị rủi ro thanh khoản và rủi ro tín dụng",
         ]
       : status === "under"
         ? [
-            "Tăng vốn cấp 1 thông qua phát hành cổ phiếu hoặc giữ lại lợi nhuận.",
-            "Giảm tài sản rủi ro hoặc cơ cấu lại danh mục tín dụng.",
-            "Tăng cường quản trị rủi ro thanh khoản và rủi ro tín dụng.",
+            "Tăng vốn cấp 1 thông qua phát hành cổ phiếu hoặc giữ lại lợi nhuận",
+            "Giảm tài sản rủi ro hoặc cơ cấu lại danh mục tín dụng, xử lý mạnh nợ xấu",
+            "Tái cấu trúc bảng cân đối, thoái vốn đầu tư không hiệu quả",
+            "Tăng cường quản trị rủi ro thanh khoản và rủi ro tín dụng",
           ]
         : [
-            "Tối ưu hoá việc sử dụng vốn để nâng cao ROE.",
-            "Cân nhắc mở rộng tín dụng có kiểm soát hoặc đầu tư tài sản sinh lời.",
-            "Tránh giữ vốn quá cao gây giảm hiệu quả sinh lời.",
+            "Cân nhắc tái phân bổ vốn và/hoặc mở rộng tín dụng chất lượng",
+            "Duy trì quản trị rủi ro thanh khoản và rủi ro tín dụng",
           ];
 
   return (

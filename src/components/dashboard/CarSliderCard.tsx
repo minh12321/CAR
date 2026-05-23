@@ -78,7 +78,7 @@ export function CarSliderCard() {
         label="Ngân hàng"
         value={bank}
         onChange={setBank}
-        options={carService.getBanks()}
+        options={carService.getBanks(bankGroup)}
         icon={<Landmark className="w-3.5 h-3.5" />}
       />
       <SelectField

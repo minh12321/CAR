@@ -4,6 +4,7 @@ import { carService } from "@/services/car-service";
 
 export function CurrentVsOptimalTable() {
   const car = useCarStore((s) => s.car);
+  const metric = useCarStore((s) => s.metric);
   const roa = carService.getRoa(car);
   const roe = carService.getRoe(car);
   const avg = carService.getAverages();
@@ -11,6 +12,9 @@ export function CurrentVsOptimalTable() {
 
   const roaDiff = +(roa - avg.roa).toFixed(2);
   const roeDiff = +(roe - avg.roe).toFixed(2);
+
+  const showRoa = metric === "All" || metric === "ROA";
+  const showRoe = metric === "All" || metric === "ROE";
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -28,8 +32,8 @@ export function CurrentVsOptimalTable() {
             </tr>
           </thead>
           <tbody>
-            <Row label="ROA (%)" current={roa} avg={avg.roa} diff={roaDiff} />
-            <Row label="ROE (%)" current={roe} avg={avg.roe} diff={roeDiff} />
+            {showRoa && <Row label="ROA (%)" current={roa} avg={avg.roa} diff={roaDiff} />}
+            {showRoe && <Row label="ROE (%)" current={roe} avg={avg.roe} diff={roeDiff} />}
           </tbody>
         </table>
       </Card>
@@ -45,16 +49,20 @@ export function CurrentVsOptimalTable() {
             </tr>
           </thead>
           <tbody>
-            <tr className="border-b border-border/50">
-              <td className="py-1.5">ROA (%)</td>
-              <td className="text-right tabular-nums">{th.roaOptimalCar.toFixed(2)}%</td>
-              <td className="text-right tabular-nums">{th.roaMax.toFixed(2)}%</td>
-            </tr>
-            <tr>
-              <td className="py-1.5">ROE (%)</td>
-              <td className="text-right tabular-nums">{th.roeOptimalCar.toFixed(2)}%</td>
-              <td className="text-right tabular-nums">{th.roeMax.toFixed(2)}%</td>
-            </tr>
+            {showRoa && (
+              <tr className="border-b border-border/50">
+                <td className="py-1.5">ROA (%)</td>
+                <td className="text-right tabular-nums">{th.roaOptimalCar.toFixed(2)}%</td>
+                <td className="text-right tabular-nums">{th.roaMax.toFixed(2)}%</td>
+              </tr>
+            )}
+            {showRoe && (
+              <tr>
+                <td className="py-1.5">ROE (%)</td>
+                <td className="text-right tabular-nums">{th.roeOptimalCar.toFixed(2)}%</td>
+                <td className="text-right tabular-nums">{th.roeMax.toFixed(2)}%</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </Card>

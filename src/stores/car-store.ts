@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { BANKS_BY_GROUP } from "@/data/mock-banks";
 
 type CarState = {
   car: number;
@@ -18,9 +19,15 @@ export const useCarStore = create<CarState>((set) => ({
   bankGroup: "NHTMCP lớn",
   bank: "ACB - Á Châu",
   period: "2014 - 2025",
-  metric: "ROA & ROE",
-  setCar: (car) => set({ car }),
-  setBankGroup: (bankGroup) => set({ bankGroup }),
+  metric: "All",
+  setCar: (car) =>
+    set({
+      car: Math.round(car * 2) / 2,
+    }),
+  setBankGroup: (bankGroup) => set({
+    bankGroup,
+    bank: BANKS_BY_GROUP[bankGroup]?.[0] || ""
+  }),
   setBank: (bank) => set({ bank }),
   setPeriod: (period) => set({ period }),
   setMetric: (metric) => set({ metric }),

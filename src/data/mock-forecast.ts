@@ -1,14 +1,15 @@
-export const FORECAST_INDUSTRY = [
-  { year: "2023", car: 10.42 },
-  { year: "2024", car: 11.08 },
-  { year: "2025", car: 11.76 },
-  { year: "2026F", car: 12.35 },
-];
-
-export const FORECAST_BY_GROUP = [
-  { group: "NHTM Nhà nước", "2023": 11.54, "2024": 12.08, "2025": 12.66, "2026F": 13.28, trend: "up" },
-  { group: "NHTMCP lớn", "2023": 11.03, "2024": 11.70, "2025": 12.39, "2026F": 13.01, trend: "up" },
-  { group: "NHTMCP vừa", "2023": 10.12, "2024": 10.78, "2025": 11.30, "2026F": 11.92, trend: "up" },
-  { group: "NHTMCP nhỏ", "2023": 9.28, "2024": 9.85, "2025": 10.49, "2026F": 10.91, trend: "up" },
-  { group: "Ngân hàng nước ngoài", "2023": 12.35, "2024": 12.88, "2025": 13.32, "2026F": 13.95, trend: "up" },
+export const FULL_FORECAST_DATA = [
+  { year: "2014", "Toàn ngành": 12.75, "NHTM Nhà nước": 9.15, "NHTMCP lớn": 10.38, "NHTMCP vừa": 12.76, "NHTMCP nhỏ": 18.98 },
+  { year: "2015", "Toàn ngành": 13.00, "NHTM Nhà nước": 7.75, "NHTMCP lớn": 10.10, "NHTMCP vừa": 11.72, "NHTMCP nhỏ": 16.25 },
+  { year: "2016", "Toàn ngành": 12.84, "NHTM Nhà nước": 6.88, "NHTMCP lớn": 9.01, "NHTMCP vừa": 10.75, "NHTMCP nhỏ": 14.44 },
+  { year: "2017", "Toàn ngành": 12.23, "NHTM Nhà nước": 6.42, "NHTMCP lớn": 9.49, "NHTMCP vừa": 9.88, "NHTMCP nhỏ": 12.75 },
+  { year: "2018", "Toàn ngành": 12.37, "NHTM Nhà nước": 6.57, "NHTMCP lớn": 10.55, "NHTMCP vừa": 10.21, "NHTMCP nhỏ": 12.09 },
+  { year: "2019", "Toàn ngành": 11.79, "NHTM Nhà nước": 7.59, "NHTMCP lớn": 10.91, "NHTMCP vừa": 10.31, "NHTMCP nhỏ": 11.73 },
+  { year: "2020", "Toàn ngành": 11.10, "NHTM Nhà nước": 7.74, "NHTMCP lớn": 10.65, "NHTMCP vừa": 10.45, "NHTMCP nhỏ": 11.11 },
+  { year: "2021", "Toàn ngành": 11.30, "NHTM Nhà nước": 7.61, "NHTMCP lớn": 12.79, "NHTMCP vừa": 11.48, "NHTMCP nhỏ": 10.87 },
+  { year: "2022", "Toàn ngành": 11.50, "NHTM Nhà nước": 7.96, "NHTMCP lớn": 13.70, "NHTMCP vừa": 12.68, "NHTMCP nhỏ": 10.82 },
+  { year: "2023", "Toàn ngành": 11.40, "NHTM Nhà nước": 8.61, "NHTMCP lớn": 13.71, "NHTMCP vừa": 12.48, "NHTMCP nhỏ": 9.35 },
+  { year: "2024", "Toàn ngành": 11.96, "NHTM Nhà nước": 9.14, "NHTMCP lớn": 12.46, "NHTMCP vừa": 11.54, "NHTMCP nhỏ": 11.08 },
+  { year: "2025", "Toàn ngành": 11.76, "NHTM Nhà nước": 10.07, "NHTMCP lớn": 12.64, "NHTMCP vừa": 10.69, "NHTMCP nhỏ": 11.29 },
+  { year: "2026", "Toàn ngành": 12.35, "NHTM Nhà nước": 11.17, "NHTMCP lớn": 10.56, "NHTMCP vừa": 10.53, "NHTMCP nhỏ": 12.95 },
 ];

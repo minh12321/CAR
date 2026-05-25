@@ -2,11 +2,15 @@ import { Card } from "@/components/ui/card";
 import { Bot, CheckCircle2 } from "lucide-react";
 import { useCarStore } from "@/stores/car-store";
 import { carService } from "@/services/car-service";
+import vi from "@/assets/vi.png";
+import nh_congnghe from "@/assets/nh_congnghe.png";
+import { useThemeStore } from "@/stores/theme-store";
 
 export function AiInsightCard() {
   const car = useCarStore((s) => s.car);
   const th = carService.getThresholds();
   const status = carService.getStatus(car);
+  const theme = useThemeStore((s) => s.theme);
 
   const headline =
     status === "optimal"
@@ -35,15 +39,23 @@ export function AiInsightCard() {
 
   return (
     <Card className="p-3">
-      <div className="flex items-center gap-2 mb-2">
-        <div className="w-7 h-7 rounded-md bg-primary/15 border border-primary/30 flex items-center justify-center">
-          <Bot className="w-4 h-4 text-primary" />
+      <div className="flex  gap-2 mb-2">
+        <div className="t-30 w-15 h-15 rounded-md bg-primary/15 border border-primary/30 flex items-center justify-center">
+          <Bot className="w-25 h-25 text-primary" />
         </div>
-        <div className="text-[12px] font-semibold">3. AI INSIGHT</div>
-      </div>
-      <p className="text-xs text-foreground/90 leading-relaxed mb-3">
-        {highlightCar(headline, car)}
-      </p>
+        <div className="text-[12px] font-semibold">3. AI INSIGHT
+        <div className="flex">
+          <div className="mt-3 t-30 w-full h-25 rounded-md bg-secondary/15 border border-primary/30 flex items-center justify-center">
+              <p className="text-xs text-foreground/90 leading-relaxed mb-3 mt-3 m-3">
+                {highlightCar(headline, car)}
+                
+              </p></div>
+              <img src={theme === "dark" ? vi : nh_congnghe} alt="Vietnamese" className="w-35 rounded-md mb-3" />
+              </div>
+
+        </div>
+      </div >
+      
       <div className="text-[11px] font-semibold text-muted-foreground mb-1.5">Gợi ý từ AI</div>
       <ul className="space-y-1.5">
         {tips.map((t) => (

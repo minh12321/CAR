@@ -12,6 +12,8 @@ import {
   DropdownMenuTrigger, DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
+import nh_den from "@/assets/nh_den.png";
+import nh_trang from "@/assets/nh_trang.png";
 
 const NAV = [
   { to: "/dashboard", label: "Tổng quan", icon: Home },
@@ -68,11 +70,13 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             );
           })}
         </nav>
-        <div className="p-4 border-t border-sidebar-border">
-          <div className="rounded-lg bg-primary/10 border border-primary/20 p-3 text-center">
-            <ShieldCheck className="w-7 h-7 text-primary mx-auto mb-1" />
-            <div className="text-[11px] font-semibold text-sidebar-foreground">An toàn hệ thống</div>
-            <div className="text-[10px] text-muted-foreground">Hiệu quả bền vững</div>
+        <div>
+          <img src={theme === "dark" ? nh_den : nh_trang} alt="Bank" className="w-full h-38 object-cover " />
+        </div>
+        <div className="p-4 ">
+          <div className=" text-center">
+            <div className="text-[20px] font-bold text-sidebar-foreground">An toàn hệ thống</div>
+            <div className="text-[20px] font-bold text-sidebar-foreground">Hiệu quả bền vững</div>
           </div>
         </div>
       </aside>
@@ -94,7 +98,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 border border-white/10
                 bg-white/5
                 hover:bg-white/10
-                text-white
+
                 transition-all duration-200
                 backdrop-blur-md
                 shadow-sm

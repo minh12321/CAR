@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Landmark, Eye, EyeOff, KeyRound } from "lucide-react";
+import { Landmark, Eye, EyeOff, KeyRound, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useAuthStore } from "@/stores/auth-store";
 import { toast } from "sonner";
+import { useThemeStore } from "@/stores/theme-store";
+import tlu from "@/assets/tlu.png";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -16,6 +18,8 @@ export default function LoginPage() {
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState("");
   const [remember, setRemember] = useState(true);
+  const theme = useThemeStore((s) => s.theme);
+  const toggle = useThemeStore((s) => s.toggle);
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,7 +34,9 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen grid lg:grid-cols-2 bg-background">
+      
       <div className="hidden lg:flex flex-col justify-center items-center bg-gradient-to-br from-primary/15 via-background to-info/10 p-12">
+        
         <div className="max-w-md text-center space-y-6">
           <div className="mx-auto w-24 h-24 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20">
             <Landmark className="w-12 h-12 text-primary" />
@@ -41,10 +47,17 @@ export default function LoginPage() {
           </div>
           <p className="text-sm text-muted-foreground">An toàn hệ thống — Hiệu quả bền vững</p>
         </div>
+        <img src={tlu} alt="TLU" className="w-15 mt-10 opacity-80" />
       </div>
 
       <div className="flex items-center justify-center p-6 lg:p-12">
+        
         <form onSubmit={onSubmit} className="w-full max-w-sm space-y-6">
+          <div className="flex justify-end">
+            <Button variant="ghost" size="icon" onClick={toggle} aria-label="Đổi giao diện" className="rounded-full">
+              {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </Button>
+          </div>
           <div className="lg:hidden text-center mb-4">
             <Landmark className="w-10 h-10 text-primary mx-auto" />
             <h1 className="mt-2 text-xl font-bold">CAR OPTIMIZATION ENGINE</h1>

@@ -2,6 +2,9 @@ import { Card } from "@/components/ui/card";
 import { useCarStore } from "@/stores/car-store";
 import { carService } from "@/services/car-service";
 import { TrendingUp, PieChart, CheckCircle2, AlertTriangle, AlertCircle, Target } from "lucide-react";
+import { useThemeStore } from "@/stores/theme-store";
+import pt from "@/assets/pt.png"; 
+import tron from "@/assets/tron.png";
 
 export function KpiCards() {
   const car = useCarStore((s) => s.car);
@@ -10,6 +13,7 @@ export function KpiCards() {
   const avg = carService.getAverages();
   const status = carService.getStatus(car);
   const th = carService.getThresholds();
+  const theme = useThemeStore((s) => s.theme);
 
   const roaDiff = +(roa - avg.roa).toFixed(2);
   const roeDiff = +(roe - avg.roe).toFixed(2);
@@ -21,7 +25,8 @@ export function KpiCards() {
           color: "text-success",
           bg: "bg-success/10 border-success/30",
           Icon: CheckCircle2,
-          desc: `CAR hiện tại ${car.toFixed(2)}% nằm trong vùng tối ưu (${th.low}% – ${th.high}%)`,
+          desc: `CAR hiện tại ${car.toFixed(2)}% 
+          nằm trong vùng tối ưu (${th.low}% – ${th.high}%)`,
         }
       : status === "under"
         ? {
@@ -29,29 +34,31 @@ export function KpiCards() {
             color: "text-warning",
             bg: "bg-warning/10 border-warning/30",
             Icon: AlertTriangle,
-            desc: `CAR hiện tại ${car.toFixed(2)}% dưới ngưỡng tối ưu (${th.low}%)`,
+            desc: `CAR hiện tại ${car.toFixed(2)}% 
+            dưới ngưỡng tối ưu (${th.low}%)`,
           }
         : {
             label: "VỐN THỪA",
             color: "text-destructive",
             bg: "bg-destructive/10 border-destructive/30",
             Icon: AlertCircle,
-            desc: `CAR hiện tại ${car.toFixed(2)}% vượt ngưỡng tối ưu (${th.high}%)`,
+            desc: `CAR hiện tại ${car.toFixed(2)}% 
+            vượt ngưỡng tối ưu (${th.high}%)`,
           };
 
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
       <KpiCard
-        icon={<TrendingUp className="w-5 h-5 text-success" />}
-        iconBg="bg-success/10"
+        icon={<img src={pt} alt="ROA" className="w-15 h-10" />}
+        iconBg=""
         title="ROA (Tỷ suất LNST/TTS)"
         value={`${roa.toFixed(2)}%`}
         diff={roaDiff}
         sub="So với trung bình"
       />
       <KpiCard
-        icon={<PieChart className="w-5 h-5 text-info" />}
-        iconBg="bg-info/10"
+        icon={<img src={tron} alt="ROE" className="w-15 h-10" />}
+        iconBg=""
         title="ROE (Tỷ suất LNST/VCSH)"
         value={`${roe.toFixed(2)}%`}
         diff={roeDiff}

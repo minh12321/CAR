@@ -54,7 +54,7 @@ export default function LoginPage() {
         
         <form onSubmit={onSubmit} className="w-full max-w-sm space-y-6">
           <div className="flex justify-end">
-            <Button variant="ghost" size="icon" onClick={toggle} aria-label="Đổi giao diện" className="rounded-full">
+            <Button type="button" variant="ghost" size="icon" onClick={toggle} aria-label="Đổi giao diện" className="rounded-full">
               {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </Button>
           </div>

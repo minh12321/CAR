@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Home, Activity, BarChart3, ShieldCheck, LineChart, Users, FileText,
-  Database, Settings, Sun, Moon, Bell, CalendarDays, Landmark, LogOut, ChevronDown,
+  Database, Settings, Sun, Moon, Bell, CalendarDays, Landmark, LogOut, ChevronDown, Menu
 } from "lucide-react";
 import { useThemeStore } from "@/stores/theme-store";
 import { useAuthStore } from "@/stores/auth-store";
@@ -11,6 +11,7 @@ import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem,
   DropdownMenuTrigger, DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useState } from "react";
 import nh_den from "@/assets/nh_den.png";
 import nh_trang from "@/assets/nh_trang.png";
@@ -32,7 +33,6 @@ const languages = [
   { code: "vi", label: "Tiếng Việt" },
 ];
 
-
 export function AppShell({ children }: { children: React.ReactNode }) {
   const theme = useThemeStore((s) => s.theme);
   const toggle = useThemeStore((s) => s.toggle);
@@ -41,54 +41,77 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
   const path = useLocation().pathname;
   const [lang, setLang] = useState("vi");
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+
+  const SidebarContent = () => (
+    <div className="flex flex-col h-full">
+      <div className="px-4 py-4 border-b border-sidebar-border">
+        <div className="flex items-center gap-2">
+          <div className="w-9 h-9 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center">
+            <Landmark className="w-5 h-5 text-primary" />
+          </div>
+          <div className="leading-tight">
+            <div className="text-[13px] font-bold text-sidebar-foreground">CAR OPTIMIZATION</div>
+            <div className="text-[10px] text-muted-foreground">Banking Simulator</div>
+          </div>
+        </div>
+      </div>
+      <nav className="flex-1 p-2 space-y-0.5 overflow-y-auto">
+        {NAV.map((item) => {
+          const active = path === item.to || (item.to !== "/dashboard" && path.startsWith(item.to));
+          const Icon = item.icon;
+          return (
+            <Link key={item.to} to={item.to} onClick={() => setIsMobileOpen(false)}
+              className={`flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors ${active ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium"
+                : "text-sidebar-foreground hover:bg-sidebar-accent/40"
+                }`}>
+              <Icon className="w-4 h-4" /><span>{item.label}</span>
+            </Link>
+          );
+        })}
+      </nav>
+      <div>
+        <img src={theme === "dark" ? nh_den : nh_trang} alt="Bank" className="w-full h-38 object-cover " />
+      </div>
+      <div className="p-4 ">
+        <div className=" text-center">
+          <div className="text-[20px] font-bold text-sidebar-foreground">An toàn hệ thống</div>
+          <div className="text-[20px] font-bold text-sidebar-foreground">Hiệu quả bền vững</div>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <div className="min-h-screen flex bg-background text-foreground">
-      <aside className="w-60 shrink-0 border-r border-sidebar-border bg-sidebar flex flex-col">
-        <div className="px-4 py-4 border-b border-sidebar-border">
-          <div className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center">
-              <Landmark className="w-5 h-5 text-primary" />
-            </div>
-            <div className="leading-tight">
-              <div className="text-[13px] font-bold text-sidebar-foreground">CAR OPTIMIZATION</div>
-              <div className="text-[10px] text-muted-foreground">Banking Simulator</div>
-            </div>
-          </div>
-        </div>
-        <nav className="flex-1 p-2 space-y-0.5 overflow-y-auto">
-          {NAV.map((item) => {
-            const active = path === item.to || (item.to !== "/dashboard" && path.startsWith(item.to));
-            const Icon = item.icon;
-            return (
-              <Link key={item.to} to={item.to}
-                className={`flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors ${active ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium"
-                  : "text-sidebar-foreground hover:bg-sidebar-accent/40"
-                  }`}>
-                <Icon className="w-4 h-4" /><span>{item.label}</span>
-              </Link>
-            );
-          })}
-        </nav>
-        <div>
-          <img src={theme === "dark" ? nh_den : nh_trang} alt="Bank" className="w-full h-38 object-cover " />
-        </div>
-        <div className="p-4 ">
-          <div className=" text-center">
-            <div className="text-[20px] font-bold text-sidebar-foreground">An toàn hệ thống</div>
-            <div className="text-[20px] font-bold text-sidebar-foreground">Hiệu quả bền vững</div>
-          </div>
-        </div>
+      {/* Desktop Sidebar */}
+      <aside className="hidden md:flex w-60 shrink-0 border-r border-sidebar-border bg-sidebar flex-col">
+        <SidebarContent />
       </aside>
 
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="h-14 border-b border-border bg-card/50 backdrop-blur flex items-center justify-between px-5">
-          <div>
-            <h1 className="text-base font-bold tracking-tight">CAR OPTIMIZATION ENGINE</h1>
-            <p className="text-[11px] text-muted-foreground">Banking Decision & Performance Simulator</p>
+        <header className="h-14 border-b border-border bg-card/50 backdrop-blur flex items-center justify-between px-3 md:px-5">
+          <div className="flex items-center gap-2 md:gap-0">
+            {/* Mobile Sidebar Trigger */}
+            <Sheet open={isMobileOpen} onOpenChange={setIsMobileOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="md:hidden">
+                  <Menu className="w-5 h-5" />
+                  <span className="sr-only">Toggle menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="p-0 w-64 bg-sidebar border-r-sidebar-border">
+                <SidebarContent />
+              </SheetContent>
+            </Sheet>
+
+            <div>
+              <h1 className="text-sm md:text-base font-bold tracking-tight">CAR OPTIMIZATION ENGINE</h1>
+              <p className="text-[10px] md:text-[11px] text-muted-foreground hidden sm:block">Banking Decision & Performance Simulator</p>
+            </div>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="relative group">
+          <div className="flex items-center gap-1 md:gap-3">
+            <div className="relative group hidden sm:block">
               {/* Button */}
               <button
                 className="
@@ -154,7 +177,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <div className="hidden md:flex items-center gap-2 text-xs text-muted-foreground border border-border rounded-md px-3 py-1.5">
               <CalendarDays className="w-3.5 h-3.5" /><span>Cập nhật: 20/05/2026</span>
             </div>
-            <Button variant="ghost" size="icon" onClick={toggle} aria-label="Đổi giao diện" className="rounded-full">
+            <Button variant="ghost" size="icon" onClick={toggle} aria-label="Đổi giao diện" className="rounded-full hidden sm:inline-flex">
               {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </Button>
             <Button variant="ghost" size="icon" className="rounded-full relative">
@@ -163,7 +186,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             </Button>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="flex items-center gap-2 px-2 py-1 rounded-md hover:bg-muted">
+                <button className="flex items-center gap-2 px-1 md:px-2 py-1 rounded-md hover:bg-muted">
                   <div className="w-8 h-8 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-xs font-semibold text-primary">
                     {(username ?? "A").slice(0, 2).toUpperCase()}
                   </div>
@@ -171,7 +194,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                     <div className="text-xs font-medium">{username ?? "Admin"}</div>
                     <div className="text-[10px] text-muted-foreground">Quản trị viên</div>
                   </div>
-                  <ChevronDown className="w-3.5 h-3.5 text-muted-foreground" />
+                  <ChevronDown className="w-3.5 h-3.5 text-muted-foreground hidden md:block" />
                 </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-44">
@@ -186,7 +209,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             </DropdownMenu>
           </div>
         </header>
-        <main className="flex-1 overflow-auto p-4">{children}</main>
+        <main className="flex-1 overflow-auto p-2 md:p-4">{children}</main>
       </div>
     </div>
   );

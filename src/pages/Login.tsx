@@ -9,6 +9,10 @@ import { useAuthStore } from "@/stores/auth-store";
 import { toast } from "sonner";
 import { useThemeStore } from "@/stores/theme-store";
 import tlu from "@/assets/tlu.png";
+import lo1 from "@/assets/lo1.jpg";
+import lo2 from "@/assets/lo2.jpg";
+import lo3 from "@/assets/lo3.jpg";
+import lo4 from "@/assets/lo4.jpg";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -33,7 +37,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen grid lg:grid-cols-2 bg-background">
+    <div className="min-h-screen grid lg:grid-cols-2  ">
       
       <div className="hidden lg:flex flex-col justify-center items-center bg-gradient-to-br from-primary/15 via-background to-info/10 p-12">
         
@@ -122,6 +126,18 @@ export default function LoginPage() {
           </p>
         </form>
       </div>
+      <>
+        {/* Mobile */}
+        <img
+          src={theme === "dark" ? lo1 : lo2}
+          className="block md:hidden absolute inset-0 w-full h-full object-cover  -z-10"
+        />
+        {/* Desktop */}
+        <img
+          src={theme === "dark" ? lo4 : lo3}
+          className="hidden md:block absolute inset-0 w-full h-full object-cover  -z-10"
+        />
+      </>
     </div>
   );
 }

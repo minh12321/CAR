@@ -65,11 +65,11 @@ export function KpiCards() {
         sub="So với trung bình"
       />
       <Card className={`p-3 border ${statusMeta.bg}`}>
-        <div className="text-[11px] font-semibold text-muted-foreground mb-1">
+        <div className="text-[9px] sm:text-[10px] lg:text-[11px] font-semibold text-muted-foreground mb-1 whitespace-nowrap tracking-tight truncate" title="TRẠNG THÁI HIỆN TẠI">
           TRẠNG THÁI HIỆN TẠI
         </div>
         <div className="flex items-center justify-between">
-          <div className={`text-2xl font-bold ${statusMeta.color}`}>{statusMeta.label}</div>
+          <div className={`text-xl lg:text-2xl font-bold ${statusMeta.color}`}>{statusMeta.label}</div>
           <statusMeta.Icon className={`w-7 h-7 ${statusMeta.color}`} />
         </div>
         <div className="text-[11px] text-muted-foreground mt-1 leading-snug">
@@ -77,10 +77,10 @@ export function KpiCards() {
         </div>
       </Card>
       <Card className="p-3">
-        <div className="text-[11px] font-semibold text-muted-foreground mb-1.5">
+        <div className="text-[9px] sm:text-[10px] lg:text-[11px] font-semibold text-muted-foreground mb-1.5 whitespace-nowrap tracking-tight truncate" title="THAM CHIẾU NGƯỠNG TỐI ƯU">
           THAM CHIẾU NGƯỠNG TỐI ƯU
         </div>
-        <div className="space-y-1.5 text-xs">
+        <div className="space-y-1.5 text-[10px] sm:text-xs">
           <div className="flex items-center gap-2">
             <Target className="w-3.5 h-3.5 text-info" />
             <span className="text-muted-foreground">Ngưỡng tối ưu ROA:</span>
@@ -120,8 +120,8 @@ function KpiCard({
           {icon}
         </div>
         <div className="min-w-0 flex-1">
-          <div className="text-[11px] font-semibold text-muted-foreground truncate">{title}</div>
-          <div className="text-2xl font-bold text-primary tabular-nums leading-tight">{value}</div>
+          <div className="text-[9px] sm:text-[10px] lg:text-[11px] font-semibold text-muted-foreground whitespace-nowrap tracking-tight truncate" title={title}>{title}</div>
+          <div className="text-xl lg:text-2xl font-bold text-primary tabular-nums leading-tight">{value}</div>
           <div className={`text-[11px] font-medium ${positive ? "text-success" : "text-destructive"}`}>
             {positive ? "↑" : "↓"} {Math.abs(diff).toFixed(2)} điểm %
           </div>

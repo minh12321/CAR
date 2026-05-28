@@ -44,12 +44,12 @@ export function CarSliderCard() {
           ) : (
             <button
               onClick={() => {
-                setTempVal(car.toFixed(2));
+                setTempVal(car.toString());
                 setEditing(true);
               }}
               className="text-2xl lg:text-3xl font-bold text-primary tabular-nums hover:opacity-80 flex items-center gap-1 lg:gap-1.5"
             >
-              {car.toFixed(2)}%
+              {Number(car.toFixed(2))}%
               <Pencil className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-muted-foreground" />
             </button>
           )}

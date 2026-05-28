@@ -22,7 +22,7 @@ export const useCarStore = create<CarState>((set) => ({
   metric: "All",
   setCar: (car) =>
     set({
-      car: Math.round(car * 2) / 2,
+      car: Math.round(car * 100) / 100,
     }),
   setBankGroup: (bankGroup) => set({
     bankGroup,

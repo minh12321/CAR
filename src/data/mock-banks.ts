@@ -8,6 +8,7 @@ export const BANK_GROUPS = [
 
 export const BANKS_BY_GROUP: Record<string, string[]> = {
   "All": [
+    "All",
     "ACB - Á Châu",
     "HDB - HDBank",
     "LPB - LienVietPost Bank",
@@ -32,11 +33,13 @@ export const BANKS_BY_GROUP: Record<string, string[]> = {
     "VCB - Vietcombank",
   ],
   "NHTM Nhà nước": [
+    "All",
     "BID - BIDV",
     "CTG - VietinBank",
     "VCB - Vietcombank",
   ],
   "NHTMCP lớn": [
+    "All",
     "ACB - Á Châu",
     "HDB - HDBank",
     "LPB - LienVietPost Bank",
@@ -49,12 +52,14 @@ export const BANKS_BY_GROUP: Record<string, string[]> = {
     "VPB - VPBank",
   ],
   "NHTMCP vừa": [
+    "All",
     "EIB - EximBank",
     "MSB - Maritime Bank",
     "NAB - Nam Á Bank",
     "OCB - Phương Đông",
   ],
   "NHTMCP nhỏ": [
+    "All",
     "ABB - ABBANK",
     "BAB - Bắc Á Bank",
     "BVB - Bảo Việt Bank",

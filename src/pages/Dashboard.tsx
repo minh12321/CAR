@@ -30,7 +30,7 @@ export default function DashboardPage() {
           <span>Phương pháp: FGLS & ARIMA</span>
           <span>Mô hình: CAR, CAR² và các biến kiểm soát</span>
         </div>
-        <div>Developed by Student Research Team | 05/2026</div>
+        <div>Developed by Research Team of Thuyloi University in 2026 || Version: Car Optimization Engine 2026.1.1</div>
       </div>
     </div>
   );

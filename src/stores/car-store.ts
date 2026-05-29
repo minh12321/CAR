@@ -16,8 +16,8 @@ type CarState = {
 
 export const useCarStore = create<CarState>((set) => ({
   car: 12,
-  bankGroup: "NHTMCP lớn",
-  bank: "ACB - Á Châu",
+  bankGroup: "All",
+  bank: "All",
   period: "2014 - 2025",
   metric: "All",
   setCar: (car) =>

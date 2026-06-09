@@ -8,6 +8,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useAuthStore } from "@/stores/auth-store";
 import { toast } from "sonner";
 import { useThemeStore } from "@/stores/theme-store";
+import { useT } from "@/hooks/useTranslation";
 import tlu from "@/assets/tlu.png";
 import lo1 from "@/assets/lo1.jpg";
 import lo2 from "@/assets/lo2.jpg";
@@ -24,15 +25,16 @@ export default function LoginPage() {
   const [remember, setRemember] = useState(true);
   const theme = useThemeStore((s) => s.theme);
   const toggle = useThemeStore((s) => s.toggle);
+  const t = useT();
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     if (login(user.trim(), pass)) {
-      toast.success("Đăng nhập thành công");
+      toast.success(t("login_success"));
       navigate("/dashboard");
     } else {
-      setError("Tên đăng nhập hoặc mật khẩu không đúng.");
+      setError(t("login_error"));
     }
   };
 
@@ -49,7 +51,7 @@ export default function LoginPage() {
             <h1 className="text-3xl font-bold tracking-tight text-foreground">CAR OPTIMIZATION ENGINE</h1>
             <p className="mt-2 text-sm text-muted-foreground">Banking Decision & Performance Simulator</p>
           </div>
-          <p className="text-sm text-muted-foreground">An toàn hệ thống — Hiệu quả bền vững</p>
+          <p className="text-sm text-muted-foreground">{t("login_tagline")}</p>
         </div>
         <img src={tlu} alt="TLU" className="w-15 mt-10 opacity-80" />
       </div>
@@ -67,25 +69,25 @@ export default function LoginPage() {
             <h1 className="mt-2 text-xl font-bold">CAR OPTIMIZATION ENGINE</h1>
           </div>
           <div>
-            <h2 className="text-2xl font-semibold text-foreground">Đăng nhập để tiếp tục</h2>
-            <p className="text-sm text-muted-foreground mt-1">Vui lòng nhập thông tin tài khoản</p>
+            <h2 className="text-2xl font-semibold text-foreground">{t("login_title")}</h2>
+            <p className="text-sm text-muted-foreground mt-1">{t("login_subtitle")}</p>
           </div>
 
           <div className="space-y-3">
             <div className="space-y-1.5">
-              <Label htmlFor="user">Tên đăng nhập</Label>
+              <Label htmlFor="user">{t("login_username")}</Label>
               <Input id="user" value={user} onChange={(e) => setUser(e.target.value)}
-                placeholder="Tên đăng nhập" autoComplete="username" required />
+                placeholder={t("login_username")} autoComplete="username" required />
             </div>
             <div className="space-y-1.5">
-              <Label htmlFor="pass">Mật khẩu</Label>
+              <Label htmlFor="pass">{t("login_password")}</Label>
               <div className="relative">
                 <Input id="pass" type={showPass ? "text" : "password"} value={pass}
-                  onChange={(e) => setPass(e.target.value)} placeholder="Mật khẩu"
+                  onChange={(e) => setPass(e.target.value)} placeholder={t("login_password")}
                   autoComplete="current-password" required />
                 <button type="button" onClick={() => setShowPass((s) => !s)}
                   className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                  aria-label="Hiện mật khẩu">
+                  aria-label={t("login_show_pass")}>
                   {showPass ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
               </div>
@@ -94,11 +96,11 @@ export default function LoginPage() {
             <div className="flex items-center justify-between text-sm">
               <label className="flex items-center gap-2 text-muted-foreground">
                 <Checkbox checked={remember} onCheckedChange={(v) => setRemember(Boolean(v))} />
-                Ghi nhớ đăng nhập
+                {t("login_remember")}
               </label>
               <button type="button" className="text-primary hover:underline"
-                onClick={() => toast.info("Liên hệ quản trị viên để đặt lại mật khẩu.")}>
-                Quên mật khẩu?
+                onClick={() => toast.info(t("login_forgot_toast"))}>
+                {t("login_forgot")}
               </button>
             </div>
 
@@ -109,16 +111,16 @@ export default function LoginPage() {
             )}
           </div>
 
-          <Button type="submit" className="w-full">Đăng nhập</Button>
+          <Button type="submit" className="w-full">{t("login_btn")}</Button>
 
           <div className="relative text-center text-xs text-muted-foreground">
-            <span className="bg-background px-2 relative z-10">hoặc</span>
+            <span className="bg-background px-2 relative z-10">{t("login_or")}</span>
             <div className="absolute inset-0 top-1/2 border-t border-border" />
           </div>
 
           <Button type="button" variant="outline" className="w-full"
-            onClick={() => toast.info("SSO chưa được kích hoạt.")}>
-            <KeyRound className="w-4 h-4 mr-2" /> Đăng nhập bằng SSO
+            onClick={() => toast.info(t("login_sso_toast"))}>
+            <KeyRound className="w-4 h-4 mr-2" /> {t("login_sso")}
           </Button>
 
           <p className="text-center text-xs text-muted-foreground">

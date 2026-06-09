@@ -16,10 +16,12 @@ import {
 import { useCarStore } from "@/stores/car-store";
 import { carService } from "@/services/car-service";
 import { useMemo } from "react";
+import { useT } from "@/hooks/useTranslation";
 
 export function NonlinearChart() {
   const car = useCarStore((s) => s.car);
   const metric = useCarStore((s) => s.metric);
+  const t = useT();
 
   const th = useMemo(() => carService.getThresholds(), []);
   const data = useMemo(() => carService.getCurveData(), []);
@@ -37,7 +39,7 @@ export function NonlinearChart() {
       {/* Header */}
       <div className="flex items-center justify-between mb-2">
         <div className="text-[12px] font-semibold">
-          2. QUAN HỆ PHI TUYẾN GIỮA CAR VÀ HIỆU QUẢ KINH DOANH
+          {t("chart_title")}
         </div>
       </div>
 
@@ -59,8 +61,6 @@ export function NonlinearChart() {
               stroke="var(--color-border)"
               opacity={0.4}
             />
-
-            {/* ===== VÙNG NỀN RESPONSIVE ===== */}
 
             {/* Thiếu vốn */}
             <ReferenceArea
@@ -119,7 +119,7 @@ export function NonlinearChart() {
                   fill: "#2563eb",
                 }}
                 label={{
-                  value: "Dự báo ROA",
+                  value: t("chart_roa_label"),
                   angle: -90,
                   position: "insideLeft",
                   fontSize: 10,
@@ -139,7 +139,7 @@ export function NonlinearChart() {
                   fill: "#16a34a",
                 }}
                 label={{
-                  value: "Dự báo ROE",
+                  value: t("chart_roe_label"),
                   angle: 90,
                   position: "insideRight",
                   fontSize: 10,
@@ -298,36 +298,32 @@ export function NonlinearChart() {
         </ResponsiveContainer>
       </div>
 
-      {/* ===== CHÚ THÍCH ===== */}
-
+      {/* Zone legend */}
       <div className="grid grid-cols-3 gap-2 mt-2 text-center text-[10px]">
         <div className="bg-yellow-400/10 border border-yellow-400/30 rounded p-1.5">
           <div className="font-semibold text-yellow-500">
-            VÙNG THIẾU VỐN
+            {t("chart_zone_under")}
           </div>
-
           <div className="text-muted-foreground">
-            Rủi ro cao – Hiệu quả thấp
+            {t("chart_zone_under_sub")}
           </div>
         </div>
 
         <div className="bg-green-500/10 border border-green-500/30 rounded p-1.5">
           <div className="font-semibold text-green-600">
-            VÙNG TỐI ƯU
+            {t("chart_zone_optimal")}
           </div>
-
           <div className="text-muted-foreground">
-            Cân bằng giữa rủi ro và lợi nhuận
+            {t("chart_zone_opt_sub")}
           </div>
         </div>
 
         <div className="bg-red-500/10 border border-red-500/30 rounded p-1.5">
           <div className="font-semibold text-red-500">
-            VÙNG VỐN THỪA
+            {t("chart_zone_over")}
           </div>
-
           <div className="text-muted-foreground">
-            Hiệu quả giảm do chi phí vốn cao
+            {t("chart_zone_over_sub")}
           </div>
         </div>
       </div>

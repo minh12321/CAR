@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Home, Activity, BarChart3, ShieldCheck, LineChart, Users, FileText,
@@ -12,20 +13,21 @@ import {
   DropdownMenuTrigger, DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { useState } from "react";
 import nh_den from "@/assets/nh_den.png";
 import nh_trang from "@/assets/nh_trang.png";
+import { useLangStore } from "@/stores/lang-store";
+import { useT } from "@/hooks/useTranslation";
 
-const NAV = [
-  { to: "/dashboard", label: "Tổng quan", icon: Home },
-  { to: "/simulation", label: "Mô phỏng CAR", icon: Activity },
-  { to: "/performance", label: "Hiệu quả hoạt động", icon: BarChart3 },
-  { to: "/risk", label: "Rủi ro & An toàn", icon: ShieldCheck },
-  { to: "/forecast", label: "Dự báo 2026", icon: LineChart },
-  { to: "/compare", label: "So sánh ngân hàng", icon: Users },
-  { to: "/reports", label: "Báo cáo", icon: FileText },
-  { to: "/data", label: "Dữ liệu", icon: Database },
-  { to: "/settings", label: "Cài đặt", icon: Settings },
+const NAV_ROUTES = [
+  { to: "/dashboard",   labelKey: "nav_dashboard",   icon: Home },
+  { to: "/simulation",  labelKey: "nav_simulation",  icon: Activity },
+  { to: "/performance", labelKey: "nav_performance", icon: BarChart3 },
+  { to: "/risk",        labelKey: "nav_risk",        icon: ShieldCheck },
+  { to: "/forecast",    labelKey: "nav_forecast",    icon: LineChart },
+  { to: "/compare",     labelKey: "nav_compare",     icon: Users },
+  { to: "/reports",     labelKey: "nav_reports",     icon: FileText },
+  { to: "/data",        labelKey: "nav_data",        icon: Database },
+  { to: "/settings",    labelKey: "nav_settings",    icon: Settings },
 ] as const;
 
 const languages = [
@@ -40,7 +42,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const logout = useAuthStore((s) => s.logout);
   const navigate = useNavigate();
   const path = useLocation().pathname;
-  const [lang, setLang] = useState("vi");
+  const lang = useLangStore((s) => s.lang);
+  const setLang = useLangStore((s) => s.setLang);
+  const t = useT();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   const SidebarContent = () => (
@@ -57,7 +61,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </div>
       </div>
       <nav className="flex-1 p-2 space-y-0.5 overflow-y-auto">
-        {NAV.map((item) => {
+        {NAV_ROUTES.map((item) => {
           const active = path === item.to || (item.to !== "/dashboard" && path.startsWith(item.to));
           const Icon = item.icon;
           return (
@@ -65,7 +69,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               className={`flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors ${active ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium"
                 : "text-sidebar-foreground hover:bg-sidebar-accent/40"
                 }`}>
-              <Icon className="w-4 h-4" /><span>{item.label}</span>
+              <Icon className="w-4 h-4" /><span>{t(item.labelKey)}</span>
             </Link>
           );
         })}
@@ -75,8 +79,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       </div>
       <div className="p-4 ">
         <div className=" text-center">
-          <div className="text-[20px] font-bold text-sidebar-foreground">An toàn hệ thống</div>
-          <div className="text-[20px] font-bold text-sidebar-foreground">Hiệu quả bền vững</div>
+          <div className="text-[20px] font-bold text-sidebar-foreground">{t("common_safe")}</div>
+          <div className="text-[20px] font-bold text-sidebar-foreground">{t("common_efficient")}</div>
         </div>
       </div>
     </div>
@@ -157,7 +161,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 {languages.map((item) => (
                   <button
                     key={item.code}
-                    onClick={() => setLang(item.code)}
+                    onClick={() => setLang(item.code as "vi" | "en")}
                     className={`
                     w-full px-4 py-2.5
                     text-left text-sm
@@ -175,7 +179,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               </div>
             </div>
             <div className="hidden md:flex items-center gap-2 text-xs text-muted-foreground border border-border rounded-md px-3 py-1.5">
-              <CalendarDays className="w-3.5 h-3.5" /><span>Cập nhật: 20/05/2026</span>
+              <CalendarDays className="w-3.5 h-3.5" /><span>{t("common_update")}</span>
             </div>
             <Button variant="ghost" size="icon" onClick={toggle} aria-label="Đổi giao diện" className="rounded-full hidden sm:inline-flex">
               {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
@@ -192,18 +196,18 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                   </div>
                   <div className="hidden md:block text-left">
                     <div className="text-xs font-medium">{username ?? "Admin"}</div>
-                    <div className="text-[10px] text-muted-foreground">Quản trị viên</div>
+                    <div className="text-[10px] text-muted-foreground">{t("common_admin")}</div>
                   </div>
                   <ChevronDown className="w-3.5 h-3.5 text-muted-foreground hidden md:block" />
                 </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-44">
                 <DropdownMenuItem onClick={() => navigate("/settings")}>
-                  <Settings className="w-4 h-4 mr-2" /> Cài đặt
+                  <Settings className="w-4 h-4 mr-2" /> {t("common_settings")}
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={() => { logout(); navigate("/login"); }}>
-                  <LogOut className="w-4 h-4 mr-2" /> Đăng xuất
+                  <LogOut className="w-4 h-4 mr-2" /> {t("common_logout")}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

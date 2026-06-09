@@ -11,16 +11,18 @@ import {
 } from "recharts";
 import { carService } from "@/services/car-service";
 import { useCarStore } from "@/stores/car-store";
+import { useT } from "@/hooks/useTranslation";
 
 export function ForecastChart() {
   const period = useCarStore((s) => s.period);
   const data = carService.getForecastIndustry(period);
   const last = data[data.length - 1];
+  const t = useT();
 
   return (
     <Card className="p-3">
       <div className="text-[12px] font-semibold mb-1">
-        5. DỰ BÁO CAR {period} (TỔNG NGÀNH – ARIMA)
+        {t("forecast_title_prefix")} {period} {t("forecast_title_suffix")}
       </div>
       <div className="h-[170px]">
         <ResponsiveContainer width="100%" height="100%">
@@ -45,7 +47,7 @@ export function ForecastChart() {
         </ResponsiveContainer>
       </div>
       <div className="text-[11px] text-muted-foreground text-center mt-1">
-        Dự báo CAR trung bình ngành năm {last.year.replace('F', '')}:{" "}
+        {t("forecast_caption_pre")} {last.year.replace('F', '')}:{" "}
         <span className="text-primary font-bold">{last.car}%</span>
       </div>
     </Card>

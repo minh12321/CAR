@@ -6,8 +6,10 @@ import { CurrentVsOptimalTable } from "@/components/dashboard/CurrentVsOptimalTa
 import { RecommendationCards } from "@/components/dashboard/RecommendationCards";
 import { ForecastChart } from "@/components/dashboard/ForecastChart";
 import { ForecastByGroupTable } from "@/components/dashboard/ForecastByGroupTable";
+import { useT } from "@/hooks/useTranslation";
 
 export default function DashboardPage() {
+  const t = useT();
   return (
     <div className="space-y-3">
       <CarSliderCard />
@@ -26,9 +28,9 @@ export default function DashboardPage() {
       <ForecastByGroupTable />
       <div className="flex flex-wrap justify-between gap-2 text-[10px] text-muted-foreground pt-2 border-t border-border">
         <div className="flex gap-4">
-          <span>Nguồn: Báo cáo tài chính các NHTM niêm yết giai đoạn 2014 – 2025</span>
-          <span>Phương pháp: FGLS & ARIMA</span>
-          <span>Mô hình: CAR, CAR² và các biến kiểm soát</span>
+          <span>{t("dashboard_source")}</span>
+          <span>{t("dashboard_method")}</span>
+          <span>{t("dashboard_model")}</span>
         </div>
         <div>Developed by Research Team of Thuyloi University in 2026 || Version: Car Optimization Engine 2026.1.1</div>
       </div>

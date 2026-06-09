@@ -2,47 +2,41 @@ import { Card } from "@/components/ui/card";
 import { useCarStore } from "@/stores/car-store";
 import { carService } from "@/services/car-service";
 import { ArrowUp, ArrowDown, Star } from "lucide-react";
+import { useT } from "@/hooks/useTranslation";
 
 export function RecommendationCards() {
   const car = useCarStore((s) => s.car);
   const status = carService.getStatus(car);
   const th = carService.getThresholds();
+  const t = useT();
 
   const cards = [
     {
       key: "under" as const,
-      title: "TĂNG CAR",
-      sub: `(Vượt ${th.high}%)`,
+      title: t("rec_increase_title"),
+      sub: `(> ${th.high}%)`,
       Icon: ArrowUp,
       color: "warning",
-      points: [
-        "Tăng an toàn vốn, khả năng chống chịu rủi ro.",
-        "Tuy nhiên hiệu quả sinh lời có xu hướng giảm.",
-        "Khuyến nghị: Chỉ tăng khi cần đáp ứng quy định hoặc mở rộng quy mô tín dụng lớn.",
-      ],
+      points: [t("rec_inc_p1"), t("rec_inc_p2"), t("rec_inc_p3")],
     },
     {
       key: "optimal" as const,
-      title: "DUY TRÌ CAR",
+      title: t("rec_maintain_title"),
       sub: `(${th.low}% – ${th.high}%)`,
       Icon: Star,
       color: "success",
-      points: [
-        "Vùng tối ưu, cân bằng giữa rủi ro và lợi nhuận.",
-        "Hiệu quả kinh doanh đạt mức cao nhất theo mô hình.",
-        "Khuyến nghị: Duy trì và tối ưu cấu trúc vốn, kiểm soát rủi ro tín dụng.",
-      ],
+      points: [t("rec_mnt_p1"), t("rec_mnt_p2"), t("rec_mnt_p3")],
     },
     {
       key: "over" as const,
-      title: "GIẢM CAR",
-      sub: `(Dưới ${th.low}%)`,
+      title: t("rec_decrease_title"),
+      sub: `(< ${th.low}%)`,
       Icon: ArrowDown,
       color: "destructive",
       points: [
-        "Hiệu quả có thể tăng nhưng rủi ro tăng mạnh.",
-        "Nguy cơ vi phạm quy định an toàn vốn.",
-        `Khuyến nghị: Không nên giảm dưới ${th.low}% để đảm bảo an toàn hệ thống.`,
+        t("rec_dec_p1"),
+        t("rec_dec_p2"),
+        `${t("rec_dec_rec_prefix")} ${th.low}% ${t("rec_dec_rec_suffix")}`,
       ],
     },
   ];

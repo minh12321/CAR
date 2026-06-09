@@ -12,18 +12,20 @@ import {
 import { carService } from "@/services/car-service";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
+import { useT } from "@/hooks/useTranslation";
 
 export function CarSliderCard() {
   const { car, setCar, bank, setBank, bankGroup, setBankGroup, period, setPeriod, metric, setMetric } =
     useCarStore();
   const [editing, setEditing] = useState(false);
   const [tempVal, setTempVal] = useState(car.toString());
+  const t = useT();
 
   return (
     <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-[1.2fr_1fr_1fr_1fr_1fr] gap-2 lg:gap-3">
       <Card className="col-span-2 sm:col-span-4 lg:col-span-1 p-2 lg:p-3 border-primary/30 bg-primary/5">
         <div className="text-[10px] lg:text-[11px] font-semibold text-muted-foreground mb-1 lg:mb-1.5">
-          1. CHỌN MỨC CAR (%)
+          {t("car_select_level")}
         </div>
         <div className="flex items-center gap-1.5 lg:gap-2 mb-1 lg:mb-2">
           {editing ? (
@@ -68,28 +70,28 @@ export function CarSliderCard() {
       </Card>
 
       <SelectField
-        label="Chọn chỉ tiêu"
+        label={t("car_metric")}
         value={metric}
         onChange={setMetric}
         options={carService.getMetrics()}
         icon={<Target className="w-3 h-3 lg:w-3.5 lg:h-3.5" />}
       />
       <SelectField
-        label="Ngân hàng"
+        label={t("car_bank")}
         value={bank}
         onChange={setBank}
         options={carService.getBanks(bankGroup)}
         icon={<Landmark className="w-3 h-3 lg:w-3.5 lg:h-3.5" />}
       />
       <SelectField
-        label="Nhóm ngân hàng"
+        label={t("car_bank_group")}
         value={bankGroup}
         onChange={setBankGroup}
         options={carService.getBankGroups()}
         icon={<Users className="w-3 h-3 lg:w-3.5 lg:h-3.5" />}
       />
       <SelectField
-        label="Giai đoạn dữ liệu"
+        label={t("car_period")}
         value={period}
         onChange={setPeriod}
         options={carService.getPeriods()}

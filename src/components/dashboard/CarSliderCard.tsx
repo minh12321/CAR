@@ -22,7 +22,7 @@ export function CarSliderCard() {
   const t = useT();
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-[1.2fr_1fr_1fr_1fr_1fr] gap-2 lg:gap-3">
+    <div data-tour="car-slider" className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-[1.2fr_1fr_1fr_1fr_1fr] gap-2 lg:gap-3">
       <Card className="col-span-2 sm:col-span-4 lg:col-span-1 p-2 lg:p-3 border-primary/30 bg-primary/5">
         <div className="text-[10px] lg:text-[11px] font-semibold text-muted-foreground mb-1 lg:mb-1.5">
           {t("car_select_level")}

@@ -49,7 +49,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   const SidebarContent = () => (
     <div className="flex flex-col h-full">
-      <div className="px-4 py-4 border-b border-sidebar-border">
+      {/* Logo — sticky, luôn hiển thị dù cuộn */}
+      <div className="sticky top-0 z-10 px-4 py-4 border-b border-sidebar-border bg-sidebar shrink-0">
         <div className="flex items-center gap-2">
           <div className="w-9 h-9 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center">
             <Landmark className="w-5 h-5 text-primary" />
@@ -74,13 +75,13 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           );
         })}
       </nav>
-      <div>
-        <img src={theme === "dark" ? nh_den : nh_trang} alt="Bank" className="w-full h-38 object-cover " />
-      </div>
-      <div className="p-4 ">
-        <div className=" text-center">
-          <div className="text-[20px] font-bold text-sidebar-foreground">{t("common_safe")}</div>
-          <div className="text-[20px] font-bold text-sidebar-foreground">{t("common_efficient")}</div>
+      <div className="sticky bottom-0 bg-sidebar shrink-0">
+        <img src={theme === "dark" ? nh_den : nh_trang} alt="Bank" className="w-full h-38 object-cover" />
+        <div className="p-4">
+          <div className="text-center">
+            <div className="text-[20px] font-bold text-sidebar-foreground">{t("common_safe")}</div>
+            <div className="text-[20px] font-bold text-sidebar-foreground">{t("common_efficient")}</div>
+          </div>
         </div>
       </div>
     </div>

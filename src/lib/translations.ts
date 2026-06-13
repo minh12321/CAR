@@ -171,6 +171,42 @@ export const translations = {
   placeholder_compare:     { vi: "So sánh ngân hàng",    en: "Bank Comparison" },
   placeholder_reports:     { vi: "Báo cáo",              en: "Reports" },
   placeholder_data:        { vi: "Dữ liệu",              en: "Data" },
+
+  // ── ACCESS DENIED ─────────────────────────────────────
+  access_title:         { vi: "Bạn không có quyền truy cập", en: "Access Denied" },
+  access_desc:          { vi: "Trang này yêu cầu quyền truy cập đặc biệt. Bạn có thể gửi yêu cầu tới quản trị viên để được cấp quyền.", en: "This page requires special access permissions. You can send a request to the administrator to be granted access." },
+  access_btn:           { vi: "Gửi yêu cầu tới Admin",   en: "Send Request to Admin" },
+  access_sending:       { vi: "Đang gửi...",              en: "Sending..." },
+  access_sent_title:    { vi: "Đã gửi yêu cầu!",         en: "Request Sent!" },
+  access_sent_desc:     { vi: "Quản trị viên sẽ xem xét và phản hồi trong thời gian sớm nhất.", en: "The administrator will review and respond as soon as possible." },
+  access_sent_again:    { vi: "Gửi lại",                  en: "Send Again" },
+
+  // ── INTRO GUIDE ───────────────────────────────────────
+  intro_welcome_title:   { vi: "Chào mừng đến với CAR Optimization Engine!", en: "Welcome to CAR Optimization Engine!" },
+  intro_welcome_desc:    { vi: "Công cụ mô phỏng và tối ưu hóa Tỷ lệ An toàn Vốn (CAR) dành cho hệ thống ngân hàng thương mại Việt Nam. Hãy để chúng tôi hướng dẫn bạn qua các tính năng chính.", en: "A simulation and optimization tool for the Capital Adequacy Ratio (CAR) of Vietnamese commercial banks. Let us walk you through the key features." },
+
+  intro_step1_title:     { vi: "Bảng điều khiển CAR", en: "CAR Control Panel" },
+  intro_step1_desc:      { vi: "Sử dụng thanh trượt để điều chỉnh mức CAR từ 5% đến 20%. Kết hợp với các bộ lọc Nhóm ngân hàng, Ngân hàng và Giai đoạn dữ liệu để phân tích theo từng tình huống cụ thể.", en: "Use the slider to adjust CAR from 5% to 20%. Combine with Bank Group, Bank, and Data Period filters to analyze specific scenarios." },
+
+  intro_step2_title:     { vi: "Chỉ số KPI", en: "KPI Metrics" },
+  intro_step2_desc:      { vi: "Xem ngay tác động của CAR lên ROA và ROE. Hệ thống sẽ tự động phân loại trạng thái: Tối ưu, Thiếu vốn hoặc Vốn thừa — giúp bạn ra quyết định nhanh chóng.", en: "Instantly see CAR's impact on ROA and ROE. The system automatically classifies the status as Optimal, Undercapitalized, or Overcapitalized — helping you decide quickly." },
+
+  intro_step3_title:     { vi: "Biểu đồ phi tuyến", en: "Nonlinear Chart" },
+  intro_step3_desc:      { vi: "Biểu đồ trực quan hóa mối quan hệ phi tuyến giữa CAR và hiệu quả kinh doanh (ROA/ROE), chia rõ ba vùng: Thiếu vốn, Tối ưu và Vốn thừa.", en: "The chart visualizes the nonlinear relationship between CAR and business performance (ROA/ROE), clearly dividing three zones: Undercapitalized, Optimal, and Overcapitalized." },
+
+  intro_step4_title:     { vi: "AI Insight", en: "AI Insight" },
+  intro_step4_desc:      { vi: "Phân tích thông minh từ mô hình AI, đưa ra gợi ý hành động cụ thể dựa trên mức CAR bạn đang chọn — từ tăng vốn, duy trì đến tái cơ cấu danh mục.", en: "Smart analysis from the AI model gives specific action suggestions based on your selected CAR level — from capital increase, maintenance, to portfolio restructuring." },
+
+  intro_step5_title:     { vi: "Dự báo & So sánh", en: "Forecast & Comparison" },
+  intro_step5_desc:      { vi: "Xem dự báo CAR năm 2026 theo mô hình ARIMA, so sánh giữa các nhóm ngân hàng. Sử dụng thanh điều hướng bên trái để khám phá các module phân tích chuyên sâu khác.", en: "View 2026 CAR forecasts using the ARIMA model, compared across bank groups. Use the left navigation to explore other in-depth analysis modules." },
+
+  intro_step_of:         { vi: "của",   en: "of" },
+  intro_btn_prev:        { vi: "Trước", en: "Previous" },
+  intro_btn_next:        { vi: "Tiếp",  en: "Next" },
+  intro_btn_start:       { vi: "Bắt đầu khám phá",    en: "Start Exploring" },
+  intro_btn_skip:        { vi: "Bỏ qua hướng dẫn",    en: "Skip Guide" },
+  intro_btn_replay:      { vi: "Xem lại hướng dẫn",   en: "Replay Guide" },
+  intro_progress:        { vi: "Tiến trình",           en: "Progress" },
 } as const;
 
 export type TranslationKey = keyof typeof translations;

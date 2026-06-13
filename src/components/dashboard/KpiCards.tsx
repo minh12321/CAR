@@ -46,7 +46,7 @@ export function KpiCards() {
           };
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+    <div data-tour="kpi-cards" className="grid grid-cols-2 lg:grid-cols-4 gap-3">
       <KpiCard
         icon={<img src={pt} alt="ROA" className="w-15 h-10" />}
         iconBg=""

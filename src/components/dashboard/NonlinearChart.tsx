@@ -35,7 +35,7 @@ export function NonlinearChart() {
   const refAxis = showRoa ? "roa" : "roe";
 
   return (
-    <Card className="p-3">
+    <Card data-tour="nonlinear-chart" className="p-3">
       {/* Header */}
       <div className="flex items-center justify-between mb-2">
         <div className="text-[12px] font-semibold">

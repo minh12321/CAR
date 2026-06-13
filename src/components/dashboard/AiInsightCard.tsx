@@ -29,7 +29,7 @@ export function AiInsightCard() {
         : [t("ai_tip_ovr_1"), t("ai_tip_ovr_2")];
 
   return (
-    <Card className="p-3">
+    <Card data-tour="ai-insight" className="p-3">
       <div className="flex  gap-2 mb-2">
         <div className="t-30 w-15 h-15 rounded-md bg-primary/15 border border-primary/30 flex items-center justify-center">
           <Bot className="w-25 h-25 text-primary" />

@@ -20,7 +20,7 @@ export function ForecastChart() {
   const t = useT();
 
   return (
-    <Card className="p-3">
+    <Card data-tour="forecast-chart" className="p-3">
       <div className="text-[12px] font-semibold mb-1">
         {t("forecast_title_prefix")} {period} {t("forecast_title_suffix")}
       </div>

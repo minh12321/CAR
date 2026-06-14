@@ -17,6 +17,7 @@ import nh_den from "@/assets/nh_den.png";
 import nh_trang from "@/assets/nh_trang.png";
 import { useLangStore } from "@/stores/lang-store";
 import { useT } from "@/hooks/useTranslation";
+import { IntroGuide, IntroReplayButton } from "@/components/dashboard/IntroGuide";
 
 const NAV_ROUTES = [
   { to: "/dashboard",   labelKey: "nav_dashboard",   icon: Home },
@@ -189,6 +190,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               <Bell className="w-4 h-4" />
               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-destructive rounded-full" />
             </Button>
+            <IntroReplayButton />
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <button className="flex items-center gap-2 px-1 md:px-2 py-1 rounded-md hover:bg-muted">
@@ -216,6 +218,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </header>
         <main className="flex-1 overflow-auto p-2 md:p-4">{children}</main>
       </div>
+      <IntroGuide />
     </div>
   );
 }

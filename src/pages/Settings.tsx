@@ -21,7 +21,7 @@ export default function SettingsPage() {
   const t = useT();
 
   return (
-    <Card className="p-4">
+    <Card data-tour="settings-page" className="p-4">
       <h2 className="text-xl font-bold mb-3">{t("settings_title")}</h2>
       <Tabs defaultValue="app">
         <TabsList>
@@ -33,7 +33,7 @@ export default function SettingsPage() {
         </TabsList>
 
         <TabsContent value="app" className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
-          <Card className="p-4 space-y-4">
+          <Card data-tour="settings-appearance" className="p-4 space-y-4">
             <div className="font-semibold text-sm">{t("settings_appearance")}</div>
             <div className="space-y-2">
               <Label>{t("settings_theme_mode")}</Label>
@@ -72,7 +72,7 @@ export default function SettingsPage() {
             <Button onClick={() => toast.success(t("settings_saved_toast"))}>{t("settings_save")}</Button>
           </Card>
 
-          <Card className="p-4 space-y-3">
+          <Card data-tour="settings-account" className="p-4 space-y-3">
             <div className="font-semibold text-sm">{t("settings_account_info")}</div>
             <Info label={t("settings_username_lbl")} value={username ?? "Admin"} />
             <Info label={t("settings_email_lbl")} value="admin@bank.com" />

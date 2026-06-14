@@ -6,16 +6,12 @@ import { CurrentVsOptimalTable } from "@/components/dashboard/CurrentVsOptimalTa
 import { RecommendationCards } from "@/components/dashboard/RecommendationCards";
 import { ForecastChart } from "@/components/dashboard/ForecastChart";
 import { ForecastByGroupTable } from "@/components/dashboard/ForecastByGroupTable";
-import { IntroGuide } from "@/components/dashboard/IntroGuide";
 import { useT } from "@/hooks/useTranslation";
 
 export default function DashboardPage() {
   const t = useT();
   return (
     <div className="space-y-3">
-      {/* Intro guide overlay — auto-shows on first visit, replay button when dismissed */}
-      <IntroGuide />
-
       <CarSliderCard />
       <KpiCards />
       <div className="grid grid-cols-1 lg:grid-cols-[1.55fr_1fr] gap-3">

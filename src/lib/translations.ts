@@ -197,8 +197,17 @@ export const translations = {
   intro_step4_title:     { vi: "AI Insight", en: "AI Insight" },
   intro_step4_desc:      { vi: "Phân tích thông minh từ mô hình AI, đưa ra gợi ý hành động cụ thể dựa trên mức CAR bạn đang chọn — từ tăng vốn, duy trì đến tái cơ cấu danh mục.", en: "Smart analysis from the AI model gives specific action suggestions based on your selected CAR level — from capital increase, maintenance, to portfolio restructuring." },
 
-  intro_step5_title:     { vi: "Dự báo & So sánh", en: "Forecast & Comparison" },
+  intro_step5_title:     { vi: "Khuyến nghị hành động", en: "Action Recommendations" },
   intro_step5_desc:      { vi: "Xem dự báo CAR năm 2026 theo mô hình ARIMA, so sánh giữa các nhóm ngân hàng. Sử dụng thanh điều hướng bên trái để khám phá các module phân tích chuyên sâu khác.", en: "View 2026 CAR forecasts using the ARIMA model, compared across bank groups. Use the left navigation to explore other in-depth analysis modules." },
+
+  intro_step6_title:     { vi: "Cài đặt hệ thống", en: "System Settings" },
+  intro_step6_desc:      { vi: "Đây là trang Cài đặt — nơi bạn cá nhân hóa toàn bộ trải nghiệm sử dụng. Gồm 2 khu vực chính: Giao diện & Ngôn ngữ bên trái, Thông tin tài khoản & Hệ thống bên phải.", en: "This is the Settings page — where you personalise your entire experience. It has 2 main areas: Appearance & Language on the left, Account & System Info on the right." },
+
+  intro_step7_title:     { vi: "Giao diện & Ngôn ngữ", en: "Appearance & Language" },
+  intro_step7_desc:      { vi: "• Chế độ Sáng / Tối: thay đổi màu nền toàn bộ app.\n• Mật độ hiển thị: Thoáng / Vừa / Chật — điều chỉnh khoảng cách các thành phần.\n• Ngôn ngữ: chuyển giữa Tiếng Việt và English.\nNhấn \"Lưu thay đổi\" để áp dụng tất cả.", en: "• Light / Dark mode: changes the entire app background.\n• Display density: Loose / Medium / Dense — adjusts component spacing.\n• Language: switch between Vietnamese and English.\nClick \"Save Changes\" to apply all." },
+
+  intro_step8_title:     { vi: "Tài khoản & Hệ thống", en: "Account & System" },
+  intro_step8_desc:      { vi: "• Thông tin tài khoản: tên đăng nhập, email, vai trò (Quản trị viên).\n• Thông tin hệ thống: phiên bản ứng dụng, ngày cập nhật cuối, trạng thái hoạt động.\nĐây là thông tin chỉ đọc, liên hệ admin để thay đổi.", en: "• Account info: username, email, role (Administrator).\n• System info: app version, last update date, active status.\nThis is read-only — contact admin to make changes." },
 
   intro_step_of:         { vi: "của",   en: "of" },
   intro_btn_prev:        { vi: "Trước", en: "Previous" },
